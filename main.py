@@ -6,7 +6,6 @@
 ==================
 """
 
-import mysql.connector
 from lectorCSV import LectorCSV
 from sqlConector import SQLConector
 

@@ -1,4 +1,3 @@
-from time import sleep
 import pandas as pd
 class LectorCSV:
     def __init__(self, fichero):
