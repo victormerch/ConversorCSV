@@ -1,28 +1,27 @@
 import mysql.connector
 class SQLConector:
     
-    def __init__(self,user,password,host,db):
+    def __init__(self):
+       self = self
        
-       self.user = user
-       self.password = password
-       self.host = host
-       self.db = db
 
-    def getConexion(self):
+    def conexion(self,user,password,host,db):
+        self.user = user
+        self.password = password
+        self.host = host
+        self.db = db
         try:
             self.mydb = mysql.connector.connect(host=self.host,
-                                           user=self.user,
-                                           password=self.password,
-                                           database=self.db)
+                                            user=self.user,
+                                            password=self.password,
+                                            database=self.db)
                                         
-            return self.mydb
+            return True
         except mysql.connector.Error as err:
             print("Error: {}".format(err))
             return False
     def createTable(self,name,columsTypes,columns,datos):
-        
-        
-        
+    
         query1 = f"CREATE TABLE {name} ({columns[0]} {columsTypes[0]} PRIMARY KEY,{columns[1]} {columsTypes[1]},{columns[2]} {columsTypes[2]}, {columns[3]} {columsTypes[3]},{columns[4]} {columsTypes[4]},{columns[5]} {columsTypes[5]},{columns[6]} {columsTypes[6]},{columns[7]} {columsTypes[7]},{columns[8]} {columsTypes[8]},{columns[9]} {columsTypes[9]},{columns[10]} {columsTypes[10]},{columns[11]} {columsTypes[11]})"
         query2 = f"insert into {name} values "
         for i in range (0,len(datos[columns[0]])):

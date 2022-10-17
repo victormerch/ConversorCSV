@@ -1,11 +1,19 @@
 import pandas as pd
+import os
 class LectorCSV:
-    def __init__(self, fichero):
+    def __init__(self):
+        self = self
+            
+        
+    def leerfichero(self,fichero):
         self.fichero = fichero
         
-        self.df = self.filtrar(pd.read_csv(fichero))
+        if os.path.exists(fichero):
+            self.df = self.filtrar(pd.read_csv(fichero))
+            return True
+        else:
+            return False
         
-    
     def getColumns(self):
         # print(self.df.columns.to_list())
         return self.df.columns.to_list()
