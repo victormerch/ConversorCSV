@@ -1,10 +1,11 @@
 import pandas as pd
 import os
 class LectorCSV:
-    
+    #Constructor vacio
     def __init__(self):
         self = self
-               
+    
+    # Funcion para leer el fichero y cargarlo en un dataframe
     def leerfichero(self,fichero):
         self.fichero = fichero
         
@@ -13,11 +14,13 @@ class LectorCSV:
             return True
         else:
             return False
-        
+    
+    # Funcion para obtener las columnas
     def getColumns(self):
         # print(self.df.columns.to_list())
         return self.df.columns.to_list()
     
+    # Funcion para obtener los tipos de datos de cada columna
     def getcolumsTypes(self):
         # print(self.df.dtypes.to_list())
         lista = self.df.dtypes.to_list()
@@ -32,10 +35,12 @@ class LectorCSV:
         # print(listaTipos)
         return listaTipos
     
+    # Funcion para obtener los datos
     def getRows(self):
         # print(self.df.to_dict('list'))
         return self.df.to_dict('list')
     
+    # Funcion para filtrar los datos
     def filtrar(self,df):
         df = df.dropna()
         df = df.drop_duplicates()
