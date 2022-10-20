@@ -1,10 +1,10 @@
 import pandas as pd
 import os
 class LectorCSV:
+    
     def __init__(self):
         self = self
-            
-        
+               
     def leerfichero(self,fichero):
         self.fichero = fichero
         
@@ -40,4 +40,3 @@ class LectorCSV:
         df = df.dropna()
         df = df.drop_duplicates()
         return df
-    

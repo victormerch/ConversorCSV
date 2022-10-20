@@ -35,7 +35,22 @@ class SQLConector:
                 else:
                     query1 += ");"
                     
-            query2 = f"insert into {name} values "
+            
+            
+            mycursor = self.mydb.cursor()
+            mycursor.execute(query1)
+            self.mydb.commit()
+            print("===Tabla creada correctamente===")
+            self.insertInTable(name,columns,columsTypes,datos)
+            
+            return True
+        except mysql.connector.Error as err:
+            print("Error: {}".format(err))
+            return False  
+        
+    def insertInTable(self,name,columns,columsTypes,datos):
+        try:
+            query = f"insert into {name} values "
             for i in range (0,len(datos[columns[0]])):
                 row = "("
                 
@@ -46,23 +61,19 @@ class SQLConector:
                         row += f"{datos[columns[y]][i]}"
                     if y != len(columns)-1:
                         row += ","
-                query2 += row + ")"
+                query += row + ")"
                 
                 if i != len(datos[columns[0]])-1:
-                    query2 += ","
+                    query += ","
                 else:
-                    query2 += ";"
+                    query += ";"
             
-            mycursor = self.mydb.cursor()
-            mycursor.execute(query1)
-            mycursor.execute(query2)
+            mycursor = self.mydb.cursor()    
+            mycursor.execute(query)
             
             self.mydb.commit()
             
             return True
         except mysql.connector.Error as err:
             print("Error: {}".format(err))
-            return False
-                            
-       
-       
+            return False  
