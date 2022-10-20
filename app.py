@@ -1,6 +1,5 @@
 """
 ======TAREAS======
-- [ ] Comentar codigo
 - [ ] Mirar de ver que hacer con datos invalidos (Opcional)
 ==================
 """
@@ -8,6 +7,7 @@
 from lectorCSV import LectorCSV
 from sqlConector import SQLConector
 from pathlib import Path
+import getpass
 
 def main():
     flag = True # Flag para controlar el bucle
@@ -17,7 +17,7 @@ def main():
     sql = SQLConector()
     
     print("==========================================")  
-    print("=====Lector de CSV y cargador a MySQL=====")
+    print("=====Conversor de CSV a BD de MySQL=====")
     print("==========================================")
     try:            
         
@@ -25,7 +25,7 @@ def main():
         
         #Preguntamos datos de la base de datos
         user = input("-Introduce el usuario de la base de datos -> ")
-        password = input("-Introduce la contraseña de la base de datos -> ")
+        password = getpass.getpass("-Introduce la contraseña de la base de datos -> ")
         host = input("-Introduce el host de la base de datos -> ")
         nombreBD = input("-Introduce el nombre de la base de datos -> ")
         
