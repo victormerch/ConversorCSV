@@ -1,10 +1,11 @@
 import mysql.connector
 class SQLConector:
     
+    # Constructor
     def __init__(self):
        self = self
        
-
+    # Funcion para conectar con la base de datos
     def conexion(self,user,password,host,db):
         self.user = user
         self.password = password
@@ -21,21 +22,35 @@ class SQLConector:
             print("Error: {}".format(err))
             return False
     
+    # Funcion para crear una tabla
     def createTable(self,name,columsTypes,columns,datos):
         try:
-            query1 = f"CREATE TABLE {name} ("
+            query = f"CREATE TABLE {name} ("
+            
             for i in range(len(columns)):
-                
-                    
-                query1 += f"{columns[i]} {columsTypes[i]}"
+                query += f"{columns[i]} {columsTypes[i]}"
                 if i == 0:
-                    query1 += " PRIMARY KEY"
+                    query += " PRIMARY KEY"
                 if i != len(columns)-1:
-                    query1 += ","
+                    query += ","
                 else:
-                    query1 += ");"
-                    
-            query2 = f"insert into {name} values "
+                    query += ");"
+            
+            mycursor = self.mydb.cursor()
+            mycursor.execute(query)
+            self.mydb.commit()
+            print("===Tabla creada correctamente===")
+            
+            return True
+        except mysql.connector.Error as err:
+            print("Error: {}".format(err))
+            return False  
+    
+    # Funcion para insertar datos en una tabla
+    def insertInTable(self,name,columns,columsTypes,datos):
+        try:
+            
+            query = f"insert into {name} values "
             for i in range (0,len(datos[columns[0]])):
                 row = "("
                 
@@ -46,23 +61,19 @@ class SQLConector:
                         row += f"{datos[columns[y]][i]}"
                     if y != len(columns)-1:
                         row += ","
-                query2 += row + ")"
+                query += row + ")"
                 
                 if i != len(datos[columns[0]])-1:
-                    query2 += ","
+                    query += ","
                 else:
-                    query2 += ";"
+                    query += ";"
             
-            mycursor = self.mydb.cursor()
-            mycursor.execute(query1)
-            mycursor.execute(query2)
+            mycursor = self.mydb.cursor()    
+            mycursor.execute(query)
             
             self.mydb.commit()
             
             return True
         except mysql.connector.Error as err:
             print("Error: {}".format(err))
-            return False
-                            
-       
-       
+            return False  
